@@ -1,0 +1,109 @@
+/* Main Container */
+.container {
+  margin-top: 30px;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+ 
+
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  padding: 20px;
+  background: linear-gradient(to right, #3b2e1d, #7a5944);
+  color: white;
+  border-radius: 10px;
+  height: 20rem;
+}
+
+.heroText {
+  max-width: 50%;
+}
+
+.heroText h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.heroText p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.ctaButton {
+  padding: 10px 20px;
+  background-color: #c0a53c;
+  color: #fefcfb;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  
+}
+
+.ctaButton:hover {
+  background-color: #de9b6e;
+  color: #fff;
+}
+
+.heroImage img {
+  width: 50rem;
+  height: 16rem;
+  max-width: 500px;
+  border-radius: 10px;
+}
+
+/* Features Section */
+.features {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.features h2 {
+  font-size: 38px;
+  color: #ff6600;
+  margin-bottom: 20px;
+}
+
+.featureList {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.featureItem {
+  max-width: 400px;
+  height: 100%;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ff6600;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.featureItem img {
+  width: 220px;
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+.featureItem h3 {
+  color: #ff6600;
+  margin-bottom: 10px;
+}
+
+.featureItem:hover {
+  background-color: #e8d7cd;
+  color: white;
+  transform: translateY(-5px);
+}
+
+.featureItem p {
+  font-size: 16px;
+  color: #6c6a6a;
+}
