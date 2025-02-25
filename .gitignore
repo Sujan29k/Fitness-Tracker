@@ -43,3 +43,6 @@ next-env.d.ts
 
 #environment files 
 .env.local
+
+todo 
+.todo

@@ -1,12 +1,14 @@
 :root {
-  --background: #ffffff; /* Light background */
-  --foreground: #171717; /* Dark text color for readability */
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
-html.dark {
+html[data-theme="dark"] {
   --background: #0a0a0a;
   --foreground: #ffffff;
 }
+
+
 
 html, body {
   box-sizing: border-box;

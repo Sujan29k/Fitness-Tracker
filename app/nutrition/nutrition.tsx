@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "./nutrition.module.css"; // Assuming you're using CSS Modules
+import styles from "./nutrition.module.css";
 
 interface Food {
   sugar_g: number;
@@ -16,7 +16,7 @@ interface Food {
   cholesterol_mg: number;
   protein_g: number;
   carbohydrates_total_g: number;
-  image?: string; // Add an optional image property
+  image?: string;
 }
 
 interface Recipe {
@@ -25,22 +25,32 @@ interface Recipe {
 }
 
 export default function Nutrition() {
-  const [query, setQuery] = useState<string>(""); // Search query
-  const [foods, setFoods] = useState<Food[]>([]); // Foods array
-  const [calories, setCalories] = useState<number>(0); // Total calories
-  const [loading, setLoading] = useState<boolean>(false); // Loading state
-  const [error, setError] = useState<string | null>(null); // Error state
-  const [recipes, setRecipes] = useState<Recipe[]>([]); // Recipes from the dummy JSON API
+  const [query, setQuery] = useState<string>("");
+  const [foods, setFoods] = useState<Food[]>([]);
+  const [calories, setCalories] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
 
-  // Fetch recipes from dummy JSON API
+  // Optionally: Set theme on first load from localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    }
+  }, []);
+
+  // Fetch recipes from a dummy JSON API
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
         const response = await axios.get("https://dummyjson.com/recipes");
-        const recipeData: Recipe[] = response.data.recipes.map((recipe: any) => ({
-          name: recipe.name.toLowerCase(),
-          image: recipe.image,
-        }));
+        const recipeData: Recipe[] = response.data.recipes.map(
+          (recipe: any) => ({
+            name: recipe.name.toLowerCase(),
+            image: recipe.image,
+          })
+        );
         setRecipes(recipeData);
       } catch (err) {
         console.error("Failed to fetch recipes:", err);
@@ -52,33 +62,31 @@ export default function Nutrition() {
 
   const fetchFoods = async () => {
     setLoading(true);
-    setError(null); // Reset error before making the request
+    setError(null);
     try {
       const response = await axios.get(
         `https://api.calorieninjas.com/v1/nutrition?query=${query}`,
         {
           headers: {
-            "X-Api-Key": process.env.NEXT_PUBLIC_API_KEY, // API key from environment variable
+            "X-Api-Key": process.env.NEXT_PUBLIC_API_KEY,
           },
         }
       );
-
-      // Extract the `items` array from the response data
       const data: Food[] = response.data.items;
 
-      // Match foods with recipes to attach images
+      // Attach images from recipes if available
       const foodsWithImages = data.map((food) => {
         const recipeMatch = recipes.find((recipe) =>
           recipe.name.includes(food.name.toLowerCase())
         );
         return {
           ...food,
-          image: recipeMatch ? recipeMatch.image : "", // Attach image or leave empty
+          image: recipeMatch ? recipeMatch.image : "",
         };
       });
 
-      setFoods(foodsWithImages); // Set the foods
-      calculateCalories(foodsWithImages); // Calculate total calories
+      setFoods(foodsWithImages);
+      calculateCalories(foodsWithImages);
     } catch (err) {
       setError("Failed to fetch data. Please try again later.");
     } finally {
@@ -96,14 +104,14 @@ export default function Nutrition() {
     const totalCalories = foods.reduce(
       (acc, food) => acc + (food.calories || 0),
       0
-    ); // Sum calories
-    setCalories(totalCalories); // Set total calories
+    );
+    setCalories(totalCalories);
   };
 
   return (
     <div className={styles.nutritionPage}>
       <div className={styles.leftSide}>
-        <h2>Search for food item</h2>
+        <h2>Search for Food Items</h2>
         <div className={styles.searchBar}>
           <input
             type="text"
@@ -132,29 +140,29 @@ export default function Nutrition() {
               <div key={index} className={styles.foodItem}>
                 <span>{food.name}</span>
                 <div className={styles.fooddetails}>
-                {food.image ? (
-                  <img
-                    src={food.image}
-                    alt={food.name}
-                    className={styles.foodImage}
-                  />
-                ) : (
-                  <p className={styles.noImage}>No image available</p>
-                )}
-                <div className={styles.nutrientlist}>
-                <p>Calories: {food.calories} kcal</p>
-                <p>Serving Size: {food.serving_size_g} g</p>
-                <p>Protein: {food.protein_g} g</p>
-                <p>Fat: {food.fat_total_g} g</p>
-                <p>Saturated Fat: {food.fat_saturated_g} g</p>
-                <p>Carbs: {food.carbohydrates_total_g} g</p>
-                <p>Fiber: {food.fiber_g} g</p>
-                <p>Sodium: {food.sodium_mg} mg</p>
-                <p>Potassium: {food.potassium_mg} mg</p>
-                <p>Cholesterol: {food.cholesterol_mg} mg</p>
-                <p>Sugar: {food.sugar_g} g</p>
+                  {food.image ? (
+                    <img
+                      src={food.image}
+                      alt={food.name}
+                      className={styles.foodImage}
+                    />
+                  ) : (
+                    <p className={styles.noImage}>No image available</p>
+                  )}
+                  <div className={styles.nutrientlist}>
+                    <p>Calories: {food.calories} kcal</p>
+                    <p>Serving Size: {food.serving_size_g} g</p>
+                    <p>Protein: {food.protein_g} g</p>
+                    <p>Fat: {food.fat_total_g} g</p>
+                    <p>Saturated Fat: {food.fat_saturated_g} g</p>
+                    <p>Carbs: {food.carbohydrates_total_g} g</p>
+                    <p>Fiber: {food.fiber_g} g</p>
+                    <p>Sodium: {food.sodium_mg} mg</p>
+                    <p>Potassium: {food.potassium_mg} mg</p>
+                    <p>Cholesterol: {food.cholesterol_mg} mg</p>
+                    <p>Sugar: {food.sugar_g} g</p>
+                  </div>
                 </div>
-              </div>
               </div>
             ))
           )}

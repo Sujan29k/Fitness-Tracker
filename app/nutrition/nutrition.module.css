@@ -1,15 +1,17 @@
+/* nutrition.module.css */
+
 /* Layout Styles */
 .nutritionPage {
   margin-top: 30px;
   display: flex;
   padding: 20px;
   gap: 3rem;
-
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 .leftSide {
   width: 600px;
-  margin-right: 20px;
   margin: 5rem 0 0 5rem;
   display: flex;
   flex-direction: column;
@@ -37,8 +39,10 @@
   padding: 8px;
   margin-bottom: 10px;
   width: 80%;
-  height: auto;
   font-size: 1.2rem;
+  background-color: var(--card-bg);
+  color: var(--foreground);
+  border: 1px solid var(--border);
 }
 
 .searchButton {
@@ -48,7 +52,6 @@
   border: none;
   cursor: pointer;
   width: 9rem;
-  height: auto;
   font-size: 1.2rem;
 }
 
@@ -63,7 +66,7 @@
 }
 
 .colorchange {
-  color: #062c49;
+  color: var(--foreground);
 }
 
 /* Food List */
@@ -77,36 +80,40 @@
 .foodItem {
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #ddd;
-  color: #747171;
+  border: 1px solid var(--border);
+  background-color: var(--card-bg);
+  color: var(--foreground);
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .foodItem span {
   font-size: 2rem;
-  color: #7e6060;
+  color: var(--foreground);
 }
 
 .fooddetails {
   display: flex;
   flex-direction: row;
-  align-items: center; /* Align items at the top */
+  align-items: center;
   gap: 3rem;
+  width: 100%;
 }
 
 .foodImage {
-  width: 350px; /* Set a fixed width for the image */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 8px; /* Optional: Add rounded corners */
-  object-fit: cover; /* Ensure the image looks good */
+  width: 350px; /* Fixed width for the image */
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .nutrientlist {
   flex: 1;
   display: flex;
-  flex-direction: column; /* Stack the nutrient list vertically */
-  gap: 5px; /* Space between each nutrient */
+  flex-direction: column;
+  gap: 5px;
 }
 
 .nutrientlist p {
@@ -117,7 +124,6 @@
 .foodItem h3 {
   color: #ff6600;
   font-size: 1.5rem;
-  align-items: center;
 }
 
 .error {
@@ -126,38 +132,33 @@
 
 /* Responsive Design */
 
-/* For Tablets (max-width: 1024px) */
+/* Tablets (max-width: 1024px) */
 @media (max-width: 1024px) {
   .nutritionPage {
-    flex-direction: column; /* Stack the left and right sections */
+    flex-direction: column;
     align-items: center;
-    gap: 2rem; /* Adjust spacing */
+    gap: 2rem;
   }
 
-  .leftSide {
-    margin: 0;
-    width: 100%; /* Full width for smaller screens */
-    align-items: center; /* Center align contents */
-  }
-
+  .leftSide,
   .rightSide {
     margin: 0;
-    width: 100%; /* Full width for smaller screens */
+    width: 100%;
     align-items: center;
   }
 
   .foodList {
-    grid-template-columns: 1fr; /* Single column layout */
+    grid-template-columns: 1fr;
     gap: 10px;
   }
 
   .fooddetails {
-    flex-direction: column; /* Stack image and nutrients vertically */
+    flex-direction: column;
     gap: 1rem;
   }
 
   .foodImage {
-    width: 80%; /* Scale image width */
+    width: 80%;
   }
 
   .nutrientlist {
@@ -166,47 +167,43 @@
   }
 }
 
-/* For Mobile Devices (max-width: 768px) */
+/* Mobile Devices (max-width: 768px) */
 @media (max-width: 768px) {
-  body{
+  body {
     margin-top: 8rem;
   }
 
   .searchInput {
-    width: 100%; /* Full width input field */
+    width: 100%;
     font-size: 1rem;
   }
 
   .searchButton {
-    width: 100%; /* Full width button */
+    width: 100%;
     font-size: 1rem;
   }
 
   .foodList {
-    grid-template-columns: 1fr; /* Single column for mobile */
+    grid-template-columns: 1fr;
     gap: 10px;
   }
 
   .foodImage {
-    width: 100%; /* Image takes full width */
+    width: 100%;
   }
 
   .nutrientlist {
-    font-size: 0.9rem; /* Slightly smaller font size */
-    gap: 4px; /* Smaller gap between nutrients */
+    font-size: 0.9rem;
+    gap: 4px;
   }
 }
 
-/* For Small Mobile Devices (max-width: 480px) */
+/* Small Mobile Devices (max-width: 480px) */
 @media (max-width: 480px) {
-  body{
+  body {
     margin-top: 9rem;
   }
-    .fooddetails{
-      width: 65%;
-    }
-
-
-    
+  .fooddetails {
+    width: 65%;
   }
-  
+}
